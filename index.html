@@ -1615,6 +1615,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
           <div class="po-info-row"><i class="fas fa-calendar-check"></i><div><b>Expected Arrival</b><span id="po-arrival"></span></div></div>
           <div class="po-info-row"><i class="fas fa-truck"></i><div><b>Estimated Delivery Time</b><span id="po-delivery-time"></span></div></div>
           <div class="po-info-row" id="po-closing-row" style="display:none"><i class="fas fa-hourglass-half"></i><div><b>Preorder Closes</b><span id="po-closing"></span></div></div>
+          <div class="po-info-row" id="po-shipping-row" style="display:none"><i class="fas fa-shipping-fast"></i><div><b>Shipping Cost</b><span id="po-shipping-cost"></span></div></div>
         </div>
 
         <div id="po-specs-wrap" style="display:none">
@@ -2860,6 +2861,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
         <div class="form-group"><label class="form-label">Deposit Percentage <span style="color:var(--gray-400);font-weight:400;font-size:11px">(0 = full payment only)</span></label><input class="form-input" id="pp-deposit" type="number" min="0" max="100" placeholder="e.g. 50"></div>
         <div class="form-group"><label class="form-label">Preorder Qty Limit <span style="color:var(--gray-400);font-weight:400;font-size:11px">(optional)</span></label><input class="form-input" id="pp-qty-limit" type="number" placeholder="Leave blank for unlimited"></div>
       </div>
+      <div class="form-group"><label class="form-label">Preorder Shipping Cost (&#8358;) <span style="color:var(--gray-400);font-weight:400;font-size:11px">(optional — leave blank if not applicable)</span></label><input class="form-input" id="pp-shipping-cost" type="number" min="0" placeholder="Leave blank for no shipping charge"></div>
       <div class="form-group"><label class="form-label">Specifications <span style="color:var(--gray-400);font-weight:400;font-size:12px">(one per line, format: Label: Value)</span></label><textarea class="form-input" id="pp-specs" rows="3" placeholder="Material: Cotton&#10;Colour: Navy Blue&#10;Sizes: S - XXL"></textarea></div>
       <div class="form-group" style="background:rgba(124,58,237,.06);border-radius:8px;padding:12px;border:1px solid rgba(124,58,237,.2)">
         <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:700;color:var(--gray-700)">
@@ -6835,6 +6837,11 @@ window.openPreorderProduct = function(id) {
   if (p.closingDate) { closingRow.style.display='flex'; document.getElementById('po-closing').textContent = poFmtDate(p.closingDate); }
   else closingRow.style.display = 'none';
 
+  const shippingRow = document.getElementById('po-shipping-row');
+  const hasShipping = p.shippingCost !== undefined && p.shippingCost !== null && p.shippingCost > 0;
+  if (hasShipping) { shippingRow.style.display='flex'; document.getElementById('po-shipping-cost').textContent = poNaira(p.shippingCost) + ' (added at checkout)'; }
+  else shippingRow.style.display = 'none';
+
   const qtyBadge = document.getElementById('po-qty-badge');
   if (p.qtyLimit) {
     const left = Math.max(0, Number(p.qtyLimit) - Number(p.qtyTaken||0));
@@ -6900,9 +6907,11 @@ function updatePreorderAmountDue() {
   const p = currentPreorderProduct;
   if (!p) return;
   preorderQty = Math.max(1, parseInt(document.getElementById('po-qty-input').value)||1);
-  const total = Number(p.price) * preorderQty;
+  const itemTotal = Number(p.price) * preorderQty;
+  const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
   const dep = Number(p.depositPercent)||0;
-  const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(total*dep/100) : total;
+  // Shipping is always payable in full upfront, even when the item itself is on a deposit plan.
+  const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(itemTotal*dep/100) + shipping : itemTotal + shipping;
   document.getElementById('po-amount-due').textContent = poNaira(due);
 }
 
@@ -6916,12 +6925,14 @@ window.startPlacePreorder = function() {
     if (left <= 0) return showToast('This item is fully booked for preorder','error');
     if (preorderQty > left) return showToast('Only '+left+' slot(s) left','error');
   }
-  const total = Number(p.price) * preorderQty;
+  const itemTotal = Number(p.price) * preorderQty;
+  const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+  const total = itemTotal + shipping;
   const dep = Number(p.depositPercent)||0;
-  const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(total*dep/100) : total;
+  const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(itemTotal*dep/100) + shipping : total;
   document.getElementById('popay-product-name').textContent = p.name;
   document.getElementById('popay-qty').textContent = preorderQty;
-  document.getElementById('popay-total').textContent = poNaira(total);
+  document.getElementById('popay-total').textContent = poNaira(total) + (shipping > 0 ? ` (incl. ${poNaira(shipping)} shipping)` : '');
   document.getElementById('popay-due').textContent = poNaira(due);
   document.getElementById('popay-wallet-balance').textContent = poNaira(_walletBalance||0);
   document.getElementById('popay-paystack').style.display = _paystackPublicKey ? 'flex' : 'none';
@@ -6948,17 +6959,19 @@ window.confirmPreorder = async function() {
   const btn = document.getElementById('popay-confirm-btn');
   btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
   try {
-    const total = Number(p.price) * preorderQty;
+    const itemTotal = Number(p.price) * preorderQty;
+    const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+    const total = itemTotal + shipping;
     const dep = Number(p.depositPercent)||0;
     const useDeposit = preorderPaymentType==='deposit' && dep>0 && dep<100;
-    const due = useDeposit ? Math.ceil(total*dep/100) : total;
+    const due = useDeposit ? Math.ceil(itemTotal*dep/100) + shipping : total;
     const ref = 'HORMORWHUMI-PO-' + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
 
     const preorderData = {
       ref, userId: currentUser.uid, userEmail: currentUser.email,
       userName: currentUser.displayName || currentUser.email.split('@')[0],
       productId: p.id, productName: p.name, productImage: (p.images&&p.images[0])||'',
-      unitPrice: Number(p.price), quantity: preorderQty, totalAmount: total,
+      unitPrice: Number(p.price), quantity: preorderQty, itemTotal, shippingCost: shipping, totalAmount: total,
       depositPercent: dep, paymentType: useDeposit ? 'deposit' : 'full',
       amountDue: due, amountPaid: 0, balanceRemaining: total - 0,
       paymentMethod: selectedPreorderPayment, paymentRef: '',
@@ -7194,7 +7207,7 @@ function renderPreorderImagePreviews() {
 window.showAddPreorderProductModal = function() {
   document.getElementById('pp-modal-title').textContent = 'Add Preorder Product';
   document.getElementById('edit-pp-id').value = '';
-  ['pp-name','pp-price','pp-desc','pp-arrival','pp-closing','pp-delivery-time','pp-deposit','pp-qty-limit','pp-specs'].forEach(id=>{ document.getElementById(id).value=''; });
+  ['pp-name','pp-price','pp-desc','pp-arrival','pp-closing','pp-delivery-time','pp-deposit','pp-qty-limit','pp-shipping-cost','pp-specs'].forEach(id=>{ document.getElementById(id).value=''; });
   document.getElementById('pp-active').checked = true;
   document.getElementById('pp-allow-cancel').checked = true;
   _preorderImageUrls = [];
@@ -7215,6 +7228,7 @@ window.editPreorderProduct = function(id) {
   document.getElementById('pp-delivery-time').value = p.deliveryTime||'';
   document.getElementById('pp-deposit').value = p.depositPercent||'';
   document.getElementById('pp-qty-limit').value = p.qtyLimit||'';
+  document.getElementById('pp-shipping-cost').value = (p.shippingCost !== undefined && p.shippingCost !== null) ? p.shippingCost : '';
   document.getElementById('pp-specs').value = p.specs||'';
   document.getElementById('pp-active').checked = p.active !== false;
   document.getElementById('pp-allow-cancel').checked = p.allowCancel !== false;
@@ -7235,6 +7249,8 @@ window.savePreorderProduct = async function() {
   const depositPercent = Number(document.getElementById('pp-deposit').value)||0;
   const qtyLimitRaw = document.getElementById('pp-qty-limit').value;
   const qtyLimit = qtyLimitRaw ? Number(qtyLimitRaw) : null;
+  const shippingCostRaw = document.getElementById('pp-shipping-cost').value;
+  const shippingCost = shippingCostRaw !== '' ? Number(shippingCostRaw) : null; // optional — null means no shipping charge
   const specs = document.getElementById('pp-specs').value.trim();
   const active = document.getElementById('pp-active').checked;
   const allowCancel = document.getElementById('pp-allow-cancel').checked;
@@ -7244,7 +7260,7 @@ window.savePreorderProduct = async function() {
   if (!name || !price) return showToast('Name and price are required','error');
   if (!expectedArrival) return showToast('Expected arrival date is required','error');
   try {
-    const data = { name, price, category, description, images, expectedArrival, closingDate, deliveryTime, depositPercent, qtyLimit, specs, active, allowCancel, updatedAt: serverTimestamp() };
+    const data = { name, price, category, description, images, expectedArrival, closingDate, deliveryTime, depositPercent, qtyLimit, shippingCost, specs, active, allowCancel, updatedAt: serverTimestamp() };
     if (editId) {
       await updateDoc(doc(db,'preorderProducts',editId), data);
       showToast('Preorder product updated!');
@@ -7437,6 +7453,7 @@ window.viewPreorderDetail = function(id) {
       <div class="po-specs-row"><span>Customer</span><span>${o.userName}</span></div>
       <div class="po-specs-row"><span>Email</span><span>${o.userEmail}</span></div>
       <div class="po-specs-row"><span>Quantity</span><span>${o.quantity}</span></div>
+      ${o.shippingCost ? `<div class="po-specs-row"><span>Shipping Cost</span><span>${poNaira(o.shippingCost)}</span></div>` : ''}
       <div class="po-specs-row"><span>Total Amount</span><span>${poNaira(o.totalAmount)}</span></div>
       <div class="po-specs-row"><span>Amount Paid</span><span>${poNaira(o.amountPaid)}</span></div>
       <div class="po-specs-row"><span>Payment Method</span><span>${o.paymentMethod}</span></div>
