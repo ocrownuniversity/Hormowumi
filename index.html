@@ -6771,7 +6771,19 @@ const PREORDER_STATUS_MESSAGES = {
 };
 
 // ---------- LOAD PREORDER PRODUCTS (customer-facing, realtime) ----------
+const PREORDER_PRODUCTS_CACHE_KEY = 'hormorwhumi-preorder-products-cache';
 function loadPreorderProducts() {
+  // Paint last-known preorder products instantly from cache while the live connection sets up.
+  if (!allPreorderProducts.length) {
+    try {
+      const cached = JSON.parse(localStorage.getItem(PREORDER_PRODUCTS_CACHE_KEY) || 'null');
+      if (cached && Array.isArray(cached) && cached.length) {
+        allPreorderProducts = cached;
+        renderPreorderHomeRail();
+        renderPreorderPageGrid();
+      }
+    } catch(e) { /* ignore bad cache */ }
+  }
   if (_preorderProductsUnsub) return;
   try {
     _preorderProductsUnsub = onSnapshot(collection(db,'preorderProducts'), (snap) => {
@@ -6779,6 +6791,7 @@ function loadPreorderProducts() {
       renderPreorderHomeRail();
       renderPreorderPageGrid();
       if (_navStack[_navStack.length-1] === 'admin') { try { loadAdminPreorderProducts(); } catch(e){} }
+      try { localStorage.setItem(PREORDER_PRODUCTS_CACHE_KEY, JSON.stringify(allPreorderProducts)); } catch(e) { /* storage full/unavailable — safe to skip */ }
     }, e => console.error('preorderProducts listener error:', e));
   } catch(e) { console.error(e); }
 }
@@ -8122,7 +8135,19 @@ async function loadBanners() {
 }
 
 async function renderSlider() {
+  const CACHE_KEY = 'hormorwhumi-banners-cache';
+  // Paint last-known slides instantly from cache (no waiting on the network) while we fetch the live version.
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    if (cached && Array.isArray(cached) && cached.length) {
+      paintSlides(cached);
+    }
+  } catch(e) { /* ignore bad cache */ }
   const banners = await loadBanners();
+  paintSlides(banners);
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify(banners)); } catch(e) { /* storage full/unavailable — safe to skip */ }
+}
+function paintSlides(banners) {
   const container = document.getElementById('slides');
   if(!container) return;
   container.innerHTML = banners.map(b=>`
