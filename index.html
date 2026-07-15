@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Hormorwhumi Collection">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c94f8c'/%3E%3Cstop offset='1' stop-color='%236b1c49'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Poppins,Arial,sans-serif' font-size='54' font-weight='800' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%235B21B6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Poppins,Arial,sans-serif' font-size='54' font-weight='800' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
@@ -20,10 +20,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --hormorwhumi-logo: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23c94f8c%27/%3E%3Cstop offset=%271%27 stop-color=%27%236b1c49%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27url(%23g)%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-family=%27Poppins,Arial,sans-serif%27 font-size=%2754%27 font-weight=%27800%27 fill=%27white%27 text-anchor=%27middle%27%3EH%3C/text%3E%3C/svg%3E');
-  --orange: #a52c71;
-  --orange-light: #c94f8c;
-  --orange-dark: #6b1c49;
+  --hormorwhumi-logo: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23A78BFA%27/%3E%3Cstop offset=%271%27 stop-color=%27%235B21B6%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27url(%23g)%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-family=%27Poppins,Arial,sans-serif%27 font-size=%2754%27 font-weight=%27800%27 fill=%27white%27 text-anchor=%27middle%27%3EH%3C/text%3E%3C/svg%3E');
+  --orange: #7C3AED;
+  --orange-light: #A78BFA;
+  --orange-dark: #5B21B6;
   --white: #ffffff;
   --gray-50: #F3ECFB;
   --gray-100: #EADCF7;
@@ -504,7 +504,7 @@ body.dark-mode .skel-img::after{background-color:var(--surface)}
 #chatbot-btn:hover{transform:scale(1.1)}
 #chatbot-window{position:fixed;bottom:126px;right:14px;z-index:1500;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:340px;max-height:520px;display:flex;flex-direction:column;overflow:hidden;transition:.3s cubic-bezier(.34,1.56,.64,1);opacity:0;pointer-events:none;transform:translateY(16px) scale(.97)}
 #chatbot-window.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
-.chat-header{background:linear-gradient(135deg,var(--orange),#e0609d);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-header{background:linear-gradient(135deg,var(--orange),#A78BFA);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .chat-header-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .chat-header-info{flex:1;min-width:0}
 .chat-header-info h4{font-size:14px;font-weight:800;margin:0;line-height:1.2}
@@ -633,6 +633,10 @@ body{padding-bottom:70px}
 .sold-count{font-size:10px;font-weight:700;color:var(--gray-400);white-space:nowrap}
 
 /* ====== HERO SLIDER ref style ====== */
+.call-to-order-bar{display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(100deg,#7C3AED,#5B21B6);color:#fff;font-weight:800;font-size:13px;letter-spacing:.02em;padding:10px 14px;margin:0 14px 10px;border-radius:10px;box-shadow:0 3px 10px rgba(124,58,237,.28);text-decoration:none}
+.call-to-order-bar i{font-size:14px;animation:ctoRing 2.2s ease-in-out infinite}
+@keyframes ctoRing{0%,100%{transform:rotate(0)}10%{transform:rotate(18deg)}20%{transform:rotate(-14deg)}30%{transform:rotate(10deg)}40%{transform:rotate(0)}}
+@media(min-width:768px){.call-to-order-bar{margin:0 20px 12px;font-size:14px;padding:12px 16px}}
 .hero-slider{position:relative;overflow:hidden;border-radius:12px;margin:10px 14px;height:190px}
 .hero-slider-skel{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center}
 .hero-slider-skel::after{content:'';position:absolute;width:118px;height:118px;border-radius:50%;background:var(--surface) var(--hormorwhumi-logo) center/94px 94px no-repeat;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.15);opacity:.95}
@@ -641,7 +645,7 @@ body.dark-mode .hero-slider-skel::after{background-color:var(--surface)}
 @media(min-width:768px){.hero-slider{height:320px;margin:16px 20px}}
 .slides-container{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);height:100%;will-change:transform}
 .slide{min-width:100%;width:100%;height:100%;display:flex;align-items:center;padding:22px 24px;position:relative;overflow:hidden;flex-shrink:0;box-sizing:border-box}
-.slide-1{background:linear-gradient(110deg,#a52c71 0%,#e0609d 100%)}
+.slide-1{background:linear-gradient(110deg,#7C3AED 0%,#A78BFA 100%)}
 .slide-2{background:linear-gradient(120deg,#1a1a2e,#16213e)}
 .slide-3{background:linear-gradient(120deg,#0f3460,#533483)}
 .slide-content{z-index:2;max-width:52%;min-width:0;flex-shrink:0}
@@ -774,7 +778,7 @@ body.dark-mode #pwreset-audit-log { background: #111 !important; border-color: #
 .hamburger{color:var(--gray-800)!important;font-size:22px!important;background:none!important;border:none!important;padding:0!important}
 #logo-text,#header-logo-img{cursor:pointer!important;display:inline-block!important;vertical-align:middle!important;height:40px!important;width:auto!important;max-width:150px!important}
 .hicon{background:transparent!important;color:var(--gray-700)!important;font-size:22px!important;padding:4px 6px!important;border:none!important}
-.hicon .badge{background:#a52c71!important;color:#fff!important;top:-5px!important;right:-4px!important;width:17px!important;height:17px!important;font-size:9px!important}
+.hicon .badge{background:#7C3AED!important;color:#fff!important;top:-5px!important;right:-4px!important;width:17px!important;height:17px!important;font-size:9px!important}
 .hicon-label{display:none!important}
 .header-icons{gap:6px!important}
 
@@ -784,7 +788,7 @@ body.dark-mode #pwreset-audit-log { background: #111 !important; border-color: #
 .header-search{background:transparent!important;border:none!important;padding:12px 0!important;font-size:13px!important;flex:1!important;outline:none!important;color:var(--gray-700)!important}
 .header-search::placeholder{color:#aaa!important;font-size:13px!important}
 .header-search-btn{background:transparent!important;color:#aaa!important;border:none!important;font-size:16px!important;padding:0!important;display:flex!important;align-items:center!important;cursor:pointer!important}
-.header-search-btn:hover{color:#a52c71!important}
+.header-search-btn:hover{color:#7C3AED!important}
 
 /* HERO SLIDER — mobile tweaks only */
 .hero-slider{border-radius:10px!important;margin:0 14px 0!important;height:180px!important}
@@ -796,7 +800,7 @@ body.dark-mode #pwreset-audit-log { background: #111 !important; border-color: #
 .home-section{background:var(--bg)!important;margin:8px 0 0!important;padding:14px 12px 16px!important}
 .home-section-title{font-size:16px!important;font-weight:800!important;color:var(--text)!important;font-family:'Poppins',sans-serif!important;margin-bottom:4px!important}
 .home-section-header{margin-bottom:14px!important}
-.home-see-all{color:#a52c71!important;font-size:13px!important;font-weight:700!important;white-space:nowrap!important;padding-top:2px!important}
+.home-see-all{color:#7C3AED!important;font-size:13px!important;font-weight:700!important;white-space:nowrap!important;padding-top:2px!important}
 #flash-section .home-see-all{color:#f97316!important}
 
 /* FLASH SECTION */
@@ -815,16 +819,16 @@ body.dark-mode #pwreset-audit-log { background: #111 !important; border-color: #
 .pc:active{box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .pc-img-wrap{position:relative;width:100%;aspect-ratio:1/1;background:#f5f5f5;overflow:hidden;flex-shrink:0}
 .pc-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.pc-badge{position:absolute;top:7px;left:7px;background:#a52c71;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;z-index:2;letter-spacing:.3px}
+.pc-badge{position:absolute;top:7px;left:7px;background:#7C3AED;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;z-index:2;letter-spacing:.3px}
 #flash-grid .pc-badge{background:#f97316}
 .pc-body{padding:7px 8px 9px;display:flex;flex-direction:column;gap:3px;flex:1}
 .pc-name{font-size:11.5px;font-weight:700;color:#111;line-height:1.3;font-family:'Poppins',sans-serif;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:30px}
 .pc-prices{display:flex;align-items:baseline;gap:5px;flex-wrap:nowrap;margin-top:1px}
-.pc-price{font-size:13px;font-weight:900;color:#a52c71;font-family:'Poppins',sans-serif;white-space:nowrap}
+.pc-price{font-size:13px;font-weight:900;color:#7C3AED;font-family:'Poppins',sans-serif;white-space:nowrap}
 .pc-old{font-size:10px;color:#bbb;text-decoration:line-through;font-family:'Poppins',sans-serif;white-space:nowrap}
 .pc-sold-row{display:flex;align-items:center;gap:5px;margin-top:3px}
 .pc-bar-bg{flex:1;height:4px;background:#fde0d8;border-radius:2px;overflow:hidden}
-.pc-bar-fill{height:100%;background:linear-gradient(90deg,#a52c71,#e0609d);border-radius:2px}
+.pc-bar-fill{height:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:2px}
 #flash-grid .pc-bar-fill{background:linear-gradient(90deg,#f97316,#fb923c)}
 .pc-sold-txt{font-size:10px;color:#999;white-space:nowrap;font-weight:600}
 /* hide old .product-card styles */
@@ -841,7 +845,7 @@ body.dark-mode #pwreset-audit-log { background: #111 !important; border-color: #
 .bottom-nav{background:var(--surface)!important;border-top:1px solid var(--border)!important;padding:0!important}
 .bnav-item{padding:8px 4px 6px!important;font-size:10px!important;font-weight:600!important;color:var(--gray-400)!important;gap:2px!important}
 .bnav-item i{font-size:20px!important}
-.bnav-item.active{color:#a52c71!important}
+.bnav-item.active{color:#7C3AED!important}
 .bnav-badge{top:4px!important;right:calc(50% - 18px)!important;font-size:9px!important;padding:1px 4px!important}
 
 /* PAGE BACKGROUNDS */
@@ -912,7 +916,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
     <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
     <!-- Logo: show image if available, fallback to styled text -->
     <div style="flex:1;display:flex;align-items:center">
-      <span onclick="navigate('home')" style="font-family:'Poppins',sans-serif;font-weight:900;font-size:26px;color:#a52c71;cursor:pointer;letter-spacing:-0.5px;line-height:1">HORMORWHUMI</span>
+      <span onclick="navigate('home')" style="font-family:'Poppins',sans-serif;font-weight:900;font-size:26px;color:#7C3AED;cursor:pointer;letter-spacing:-0.5px;line-height:1">HORMORWHUMI</span>
     </div>
     <div class="header-icons" style="display:flex;align-items:center;gap:4px">
       <button id="dark-mode-btn" onclick="toggleDarkMode()" title="Toggle dark/light mode">🌙</button>
@@ -994,6 +998,11 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
 
 <!-- HOME PAGE -->
 <div id="page-home" class="page active">
+  <!-- Call to Order bar -->
+  <a href="tel:+2349130653960" class="call-to-order-bar">
+    <i class="fas fa-phone-volume"></i>
+    <span>CALL TO ORDER: 0913&nbsp;065&nbsp;3960</span>
+  </a>
   <!-- Hero Slider -->
   <div class="hero-slider">
     <div class="slides-container" id="slides">
@@ -1409,7 +1418,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
 <div id="page-login" class="page">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#a52c71;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
+      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#7C3AED;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
       <h2 class="auth-title">Welcome Back!</h2>
       <p class="auth-subtitle">Sign in to your Hormorwhumi account</p>
       <button class="btn-google" onclick="loginWithGoogle()"><img src="https://www.google.com/favicon.ico" width="18" height="18"> Continue with Google</button>
@@ -1427,7 +1436,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
 <div id="page-register" class="page">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#a52c71;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
+      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#7C3AED;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
       <h2 class="auth-title">Create Account</h2>
       <p class="auth-subtitle">Join Hormorwhumi and start shopping</p>
       <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="reg-name" type="text" placeholder="Your full name"></div>
@@ -1444,7 +1453,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
 <div id="page-forgot" class="page">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#a52c71;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
+      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#7C3AED;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
       <h2 class="auth-title">Forgot Password?</h2>
       <p class="auth-subtitle">Enter your email and WhatsApp number. Our admin will send your reset link via WhatsApp.</p>
       <div id="forgot-form-wrap">
@@ -1467,7 +1476,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
 <div id="page-reset-password" class="page">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#a52c71;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
+      <div class="auth-logo"><span style="font-family:'Poppins',sans-serif;font-weight:900;font-size:28px;color:#7C3AED;letter-spacing:-0.5px;cursor:pointer" onclick="navigate('home')">HORMORWHUMI</span></div>
       <h2 class="auth-title">Create New Password</h2>
       <p class="auth-subtitle" id="reset-pw-subtitle">Enter your new password below.</p>
       <div id="reset-pw-form">
@@ -1789,7 +1798,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
       <div class="admin-card">
         <div class="admin-card-title">📊 Sales Analytics</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-          <div id="analytics-total-revenue" style="background:linear-gradient(135deg,#a52c71,#e0609d);color:#fff;border-radius:10px;padding:14px;text-align:center">
+          <div id="analytics-total-revenue" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);color:#fff;border-radius:10px;padding:14px;text-align:center">
             <div style="font-size:11px;font-weight:700;opacity:.85">TOTAL REVENUE</div>
             <div id="a-revenue" style="font-size:20px;font-weight:900;margin-top:4px">₦0</div>
           </div>
@@ -5446,7 +5455,7 @@ window.loadOrders = async function() {
             <button class="track-order-btn" onclick="showTrackingModal('${o.orderId||d.id}')"><i class="fas fa-truck"></i> Track</button>
             <button style="background:var(--gray-100);border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--gray-700)" onclick="reorderItems('${d.id}')"><i class="fas fa-redo"></i> Reorder</button>
             ${canCancel ? '<button style="background:none;border:2px solid var(--red);color:var(--red);border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="cancelOrder(\''+d.id+'\',\''+o.orderId+'\')"><i class="fas fa-times"></i> Cancel</button>' : ''}
-            ${canReturn ? '<button style="background:none;border:2px solid #c94f8c;color:#c94f8c;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="requestReturn(\''+d.id+'\',\''+o.orderId+'\')"><i class="fas fa-undo"></i> Return</button>' : ''}
+            ${canReturn ? '<button style="background:none;border:2px solid #A78BFA;color:#A78BFA;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="requestReturn(\''+d.id+'\',\''+o.orderId+'\')"><i class="fas fa-undo"></i> Return</button>' : ''}
           </div>
         </div>
       </div>`;
