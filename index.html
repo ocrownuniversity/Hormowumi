@@ -6908,11 +6908,22 @@ function updatePreorderAmountDue() {
   if (!p) return;
   preorderQty = Math.max(1, parseInt(document.getElementById('po-qty-input').value)||1);
   const itemTotal = Number(p.price) * preorderQty;
-  const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+  const unitShipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+  const shipping = unitShipping * preorderQty;
   const dep = Number(p.depositPercent)||0;
   // Shipping is always payable in full upfront, even when the item itself is on a deposit plan.
   const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(itemTotal*dep/100) + shipping : itemTotal + shipping;
   document.getElementById('po-amount-due').textContent = poNaira(due);
+
+  const shippingRow = document.getElementById('po-shipping-row');
+  if (unitShipping > 0) {
+    shippingRow.style.display = 'flex';
+    document.getElementById('po-shipping-cost').textContent = preorderQty > 1
+      ? `${poNaira(shipping)} (${poNaira(unitShipping)} × ${preorderQty}, added at checkout)`
+      : `${poNaira(shipping)} (added at checkout)`;
+  } else {
+    shippingRow.style.display = 'none';
+  }
 }
 
 // ---------- PLACE PREORDER (payment modal) ----------
@@ -6926,7 +6937,8 @@ window.startPlacePreorder = function() {
     if (preorderQty > left) return showToast('Only '+left+' slot(s) left','error');
   }
   const itemTotal = Number(p.price) * preorderQty;
-  const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+  const unitShipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+  const shipping = unitShipping * preorderQty;
   const total = itemTotal + shipping;
   const dep = Number(p.depositPercent)||0;
   const due = (preorderPaymentType==='deposit' && dep>0 && dep<100) ? Math.ceil(itemTotal*dep/100) + shipping : total;
@@ -6960,7 +6972,8 @@ window.confirmPreorder = async function() {
   btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
   try {
     const itemTotal = Number(p.price) * preorderQty;
-    const shipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+    const unitShipping = (p.shippingCost !== undefined && p.shippingCost !== null) ? Number(p.shippingCost) : 0;
+    const shipping = unitShipping * preorderQty;
     const total = itemTotal + shipping;
     const dep = Number(p.depositPercent)||0;
     const useDeposit = preorderPaymentType==='deposit' && dep>0 && dep<100;
