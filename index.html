@@ -637,6 +637,18 @@ body{padding-bottom:70px}
 .call-to-order-bar i{font-size:14px;animation:ctoRing 2.2s ease-in-out infinite}
 @keyframes ctoRing{0%,100%{transform:rotate(0)}10%{transform:rotate(18deg)}20%{transform:rotate(-14deg)}30%{transform:rotate(10deg)}40%{transform:rotate(0)}}
 @media(min-width:768px){.call-to-order-bar{margin:0 20px 12px;font-size:14px;padding:12px 16px}}
+.deal-strip{display:flex;gap:10px;overflow-x:auto;padding:2px 14px 12px;scrollbar-width:none;-ms-overflow-style:none}
+.deal-strip::-webkit-scrollbar{display:none}
+.deal-tile{flex:0 0 auto;width:92px;height:100px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:#fff;text-align:center;box-shadow:0 3px 8px rgba(60,20,90,.12);transition:transform .15s ease}
+.deal-tile:active{transform:scale(.96)}
+.deal-tile i{font-size:20px}
+.deal-tile span{font-size:10.5px;font-weight:800;line-height:1.25}
+.deal-tile-1{background:linear-gradient(135deg,#7C3AED,#5B21B6)}
+.deal-tile-2{background:linear-gradient(135deg,#C89B3C,#9C7124)}
+.deal-tile-3{background:linear-gradient(135deg,#A78BFA,#7C3AED)}
+.deal-tile-4{background:linear-gradient(135deg,#2E1F44,#1C1230)}
+.deal-tile-5{background:linear-gradient(135deg,#9F67F0,#5B21B6)}
+@media(min-width:768px){.deal-strip{padding:4px 20px 16px}.deal-tile{width:112px;height:116px}.deal-tile i{font-size:24px}.deal-tile span{font-size:12px}}
 .hero-slider{position:relative;overflow:hidden;border-radius:12px;margin:10px 14px;height:190px}
 .hero-slider-skel{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center}
 .hero-slider-skel::after{content:'';position:absolute;width:118px;height:118px;border-radius:50%;background:var(--surface) var(--hormorwhumi-logo) center/94px 94px no-repeat;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.15);opacity:.95}
@@ -1013,6 +1025,30 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
     <button class="slider-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
     <button class="slider-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
     <div class="slider-dots" id="slider-dots"></div>
+  </div>
+
+  <!-- Deal Tiles Strip -->
+  <div class="deal-strip">
+    <a class="deal-tile deal-tile-1" href="javascript:void(0)" onclick="filterByCategory('all')">
+      <i class="fas fa-gift"></i>
+      <span>Deal of<br>the Month</span>
+    </a>
+    <a class="deal-tile deal-tile-2" href="javascript:void(0)" onclick="filterByCategory('all')">
+      <i class="fas fa-tags"></i>
+      <span>Clearance<br>Sale</span>
+    </a>
+    <a class="deal-tile deal-tile-3" href="javascript:void(0)" onclick="filterByCategory('Ladies')">
+      <i class="fas fa-female"></i>
+      <span>Ladies<br>Deals</span>
+    </a>
+    <a class="deal-tile deal-tile-4" href="javascript:void(0)" onclick="filterByCategory('Gadgets and Electronics')">
+      <i class="fas fa-laptop"></i>
+      <span>Gadget<br>Deals</span>
+    </a>
+    <a class="deal-tile deal-tile-5" href="https://wa.me/2349130653960?text=Hi%20Hormorwhumi%20Collection%2C%20how%20do%20I%20earn%20while%20I%20shop%3F" target="_blank">
+      <i class="fas fa-hand-holding-dollar"></i>
+      <span>Earn While<br>You Shop</span>
+    </a>
   </div>
 
   <!-- Flash Sales &mdash; directly below banner (ref image style) -->
