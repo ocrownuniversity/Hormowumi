@@ -1070,6 +1070,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
       <div class="sidebar-item" onclick="filterByCategory('Household');toggleSidebar()"><i class="fas fa-home"></i> Household</div>
       <div class="sidebar-item" onclick="filterByCategory('Gadgets and Electronics');toggleSidebar()"><i class="fas fa-laptop"></i> Gadgets and Electronics</div>
       <div class="sidebar-item" onclick="filterByCategory('Beauty and Cosmetics');toggleSidebar()"><i class="fas fa-spa"></i> Beauty and Cosmetics</div>
+      <div class="sidebar-item" onclick="filterByCategory('Wear and Fashion Accessories');toggleSidebar()"><i class="fas fa-gem"></i> Wear and Fashion Accessories</div>
     </div>
   </div>
 
@@ -1244,6 +1245,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
           <option value="Household">Household</option>
           <option value="Gadgets and Electronics">Gadgets and Electronics</option>
           <option value="Beauty and Cosmetics">Beauty and Cosmetics</option>
+          <option value="Wear and Fashion Accessories">Wear and Fashion Accessories</option>
         </select>
       </div>
     </div>
@@ -2741,7 +2743,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
       <div class="form-row">
         <div class="form-group"><label class="form-label">Category *</label>
           <select class="form-input" id="p-category">
-            <option>Kids</option><option>Ladies</option><option>Men</option><option>Household</option><option>Gadgets and Electronics</option><option>Beauty and Cosmetics</option><option>Other</option>
+            <option>Kids</option><option>Ladies</option><option>Men</option><option>Household</option><option>Gadgets and Electronics</option><option>Beauty and Cosmetics</option><option>Wear and Fashion Accessories</option><option>Other</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">Stock *</label><input class="form-input" id="p-stock" type="number" placeholder="0"></div>
@@ -2837,7 +2839,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
         <div class="form-group"><label class="form-label">Preorder Price (&#8358;) *</label><input class="form-input" id="pp-price" type="number" placeholder="0"></div>
         <div class="form-group"><label class="form-label">Category</label>
           <select class="form-input" id="pp-category">
-            <option>Kids</option><option>Ladies</option><option>Men</option><option>Household</option><option>Gadgets and Electronics</option><option>Beauty and Cosmetics</option><option>Other</option>
+            <option>Kids</option><option>Ladies</option><option>Men</option><option>Household</option><option>Gadgets and Electronics</option><option>Beauty and Cosmetics</option><option>Wear and Fashion Accessories</option><option>Other</option>
           </select>
         </div>
       </div>
@@ -3066,6 +3068,7 @@ body{padding-bottom:65px!important;background:var(--bg)!important}
           <option value="Household">Household</option>
           <option value="Gadgets and Electronics">Gadgets and Electronics</option>
           <option value="Beauty and Cosmetics">Beauty and Cosmetics</option>
+          <option value="Wear and Fashion Accessories">Wear and Fashion Accessories</option>
         </select>
       </div>
       <div>
@@ -7688,7 +7691,7 @@ function getSystemContext() {
 Store: Nigeria | WhatsApp: +234 913 065 3960 | Email: haryorbamishukroh@gmail.com | Hours: Mon–Sat 8AM–8PM WAT
 Payment: 1) Bank Transfer Opay - Hormorwhumi Collection | 9130653960 2) Pay on Delivery
 Delivery: Free above ₦150,000. ₦3,500 below. Lagos: 1-2 days. Abuja/PH: 2-3 days. Others: 3-5 days.
-Categories: Kids, Ladies, Men, Household, Gadgets and Electronics, Beauty and Cosmetics
+Categories: Kids, Ladies, Men, Household, Gadgets and Electronics, Beauty and Cosmetics, Wear and Fashion Accessories
 Current Products:\n${buildProductContext()}
 Instructions: Answer only about Hormorwhumi. Be warm, brief (2-4 lines). Use simple English. If you cannot solve the issue, say so clearly and mention a human agent can help.`;
 }
@@ -7712,7 +7715,7 @@ function smartLocalReply(text) {
   if (/contact|whatsapp|call|reach/.test(t)) return "📞 Contact: WhatsApp +234 913 065 3960 | Email: haryorbamishukroh@gmail.com\nMon–Sat 8AM–8PM";
   if (/size|sizing|fit/.test(t)) return "📏 Sizes are shown on each product page. Not sure? Message us on WhatsApp: +234 913 065 3960";
   if (/discount|sale|promo|flash/.test(t)) return "🔥 Check Flash Sales on the home page for deals! New offers added regularly 👀";
-  if (/categor|what.*sell|collection/.test(t)) return "🛍️ We sell: Kids, Ladies, Men, Household, Gadgets and Electronics, and Beauty and Cosmetics products!";
+  if (/categor|what.*sell|collection/.test(t)) return "🛍️ We sell: Kids, Ladies, Men, Household, Gadgets and Electronics, Beauty and Cosmetics, and Wear and Fashion Accessories products!";
   if (/account|login|sign in|register|password/.test(t)) return "👤 Tap the person icon → Sign In or Create Account. You can also sign in with Google. Need account help?";
   return null; // null = show human transfer option
 }
